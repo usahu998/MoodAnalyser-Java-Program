@@ -61,4 +61,11 @@ public class MoodAnalyserTest {
             Assert.assertEquals(MoodAnalysisException.ExceptionType.ENTERED_NULL,e.type);
         }
     }
+
+    @Test
+    public void givenMoodAnalyser_WhenImproper_shouldReturnDefaultObject() {
+          MoodAnalyser moodAnalyser = MoodAnalyserFactory.createMoodAnalyser();
+          boolean result = moodAnalyser.equals(new MoodAnalyser());
+          Assert.assertEquals(false, result);
+    }
 }

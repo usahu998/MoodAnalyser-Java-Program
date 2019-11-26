@@ -21,4 +21,10 @@ public class MoodAnalyser {
             throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ENTERED_NULL,"Please enter proper mood");
         }
     }
+
+    public boolean equals(Object another){
+        if (this==another)
+            return true;
+        return false;
+    }
 }
