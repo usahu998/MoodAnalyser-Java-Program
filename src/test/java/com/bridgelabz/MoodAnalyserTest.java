@@ -41,12 +41,24 @@ public class MoodAnalyserTest {
     }
 
     @Test
-    public void givenNullMood_ShouldThrowException() {
+    public void givenEmptyMood_ShouldThrowException_withType() {
+        MoodAnalyser realMoodAnalyser = new MoodAnalyser("");
+        try {
+            realMoodAnalyser.analyseMood();
+        } catch (MoodAnalysisException e) {
+            e.printStackTrace();
+            Assert.assertEquals(MoodAnalysisException.ExceptionType.ENTERED_EMPTY,e.type);
+        }
+    }
+
+    @Test
+    public void givenNullMood_ShouldThrowException_withType() {
         MoodAnalyser realMoodAnalyser = new MoodAnalyser(null);
         try {
             realMoodAnalyser.analyseMood();
         } catch (MoodAnalysisException e) {
-            Assert.assertEquals("Please enter proper mood", e.getMessage());
+            e.printStackTrace();
+            Assert.assertEquals(MoodAnalysisException.ExceptionType.ENTERED_NULL,e.type);
         }
     }
 }
