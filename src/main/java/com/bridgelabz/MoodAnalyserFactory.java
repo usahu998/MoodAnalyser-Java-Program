@@ -25,7 +25,7 @@ public class MoodAnalyserFactory {
         return null;
     }
 
-    public static MoodAnalyser createMoodAnalyserObject_NoClassFound() throws MoodAnalysisException{
+    public static MoodAnalyser createMoodAnalyserObject_NoClassFound_OR_NoMethodFound() throws MoodAnalysisException{
         try {
             Class<?> moodAnalyserClass = Class.forName("com.bridgelabz.MoodAnalyser");
             Constructor<?> moodConstructor = moodAnalyserClass.getConstructor();
@@ -34,7 +34,7 @@ public class MoodAnalyserFactory {
         } catch (ClassNotFoundException e) {
             throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS,"NO_SUCH_CLASS_ERROR");
         } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD,"NO_SUCH_METHOD_ERROR");
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
