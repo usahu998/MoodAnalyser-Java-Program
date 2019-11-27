@@ -91,4 +91,13 @@ public class MoodAnalyserTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void whenMood_ClassIsNotAvailable_ByParametrizedConstructor_ShouldReturn_CustomException_WithNoSuchClass() {
+        try {
+            MoodAnalyser moodAnalyser = MoodAnalyserReflector.createMoodAnalyserObject("I am in Happy mood");
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals("NO_SUCH_CLASS_ERROR", e.getMessage());
+        }
+    }
 }
