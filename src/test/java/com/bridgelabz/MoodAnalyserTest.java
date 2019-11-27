@@ -100,4 +100,13 @@ public class MoodAnalyserTest {
             Assert.assertEquals("NO_SUCH_CLASS_ERROR", e.getMessage());
         }
     }
+
+    @Test
+    public void whenMood_ConstructorIsNotValid_ByParametrizedConstructor_ShouldReturn_CustomException_WithNoSuchMethod() {
+        try {
+            MoodAnalyser moodAnalyser = MoodAnalyserReflector.createMoodAnalyserObject("Hello");
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals("NO_SUCH_METHOD_ERROR", e.getMessage());
+        }
+    }
 }

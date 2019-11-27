@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.bridgelabz.MoodAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-11-27T10:09:36" hostname="admin265-H110M-H" time="0.001">
+<testsuite name="com.bridgelabz.MoodAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-11-27T10:16:11" hostname="admin265-H110M-H" time="0.001">
   <properties/>
-  <testcase name="whenMood_ClassIsNotAvailable_ByParametrizedConstructor_ShouldReturn_CustomException_WithNoSuchClass" classname="com.bridgelabz.MoodAnalyserTest" time="0.001"/>
+  <testcase name="whenMood_ConstructorIsNotValid_ByParametrizedConstructor_ShouldReturn_CustomException_WithNoSuchMethod" classname="com.bridgelabz.MoodAnalyserTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
