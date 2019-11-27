@@ -55,4 +55,16 @@ public class MoodAnalyserReflector {
             throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, "Define Proper Method Name");
         }
     }
+
+    public static void setFieldValue(Object myObject, String fieldName, String fieldValue) throws MoodAnalysisException {
+        try {
+            Field field = myObject.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            field.set(myObject,fieldValue);
+        } catch (IllegalAccessException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_ACCESS, "Invocation data issue");
+        } catch (NoSuchFieldException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_FIELD, "Define Proper field Name");
+        }
+    }
 }
