@@ -3,6 +3,8 @@ package com.bridgelabz;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.lang.reflect.Constructor;
+
 public class MoodAnalyserTest {
     @Test
     public void givenMessage_WhenSad_ShouldReturnSad() {
@@ -64,17 +66,29 @@ public class MoodAnalyserTest {
 
     @Test
     public void givenMoodAnalyser_WhenImproper_shouldReturnDefaultObject() {
-          MoodAnalyser moodAnalyser = MoodAnalyserFactory.createMoodAnalyser();
-          boolean result = moodAnalyser.equals(new MoodAnalyser());
+          MoodAnalyser moodAnalyser = MoodAnalyserReflector.createMoodAnalyser();
+          boolean result = moodAnalyser.isEquals(new MoodAnalyser());
           Assert.assertEquals(false, result);
     }
 
     @Test
     public void givenMoodAnalyser_WhenImproper_shouldReturn_withNoSuchClass() {
        try {
-           MoodAnalyser moodAnalyser = MoodAnalyserFactory.createMoodAnalyserObject_NoClassFound();
+           MoodAnalyser moodAnalyser = MoodAnalyserReflector.createMoodAnalyserObject("");
        }catch (MoodAnalysisException e){
            Assert.assertEquals("NO_SUCH_CLASS_ERROR",e.getMessage());
        }
+    }
+
+    @Test
+    public void givenMoodAnalyserClass_IsEqual_ShouldReturnObject() {
+        MoodAnalyser moodAnalyser=null;
+        try {
+            moodAnalyser=MoodAnalyserReflector.createMoodAnalyserObject("I am in Happy mood");
+            boolean mood=moodAnalyser.equals(new MoodAnalyser("I am in Happy mood"));
+            Assert.assertTrue(String.valueOf(true),mood);
+        } catch (MoodAnalysisException e) {
+            e.printStackTrace();
+        }
     }
 }

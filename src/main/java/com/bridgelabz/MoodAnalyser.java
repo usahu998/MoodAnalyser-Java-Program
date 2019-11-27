@@ -22,9 +22,16 @@ public class MoodAnalyser {
         }
     }
 
-    public boolean equals(Object another){
+    public boolean isEquals(Object another){
         if (this==another)
             return true;
+        return false;
+    }
+
+    public boolean equals(Object another){
+        if (this.message.equals(((MoodAnalyser)another).message)) {
+            return true;
+        }
         return false;
     }
 }

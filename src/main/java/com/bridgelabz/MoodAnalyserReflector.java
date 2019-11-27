@@ -1,11 +1,13 @@
 package com.bridgelabz;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
-public class MoodAnalyserFactory {
-    public static MoodAnalyser createMoodAnalyser(){
-        MoodAnalyser result =  null;
+public class MoodAnalyserReflector {
+
+    public static MoodAnalyser createMoodAnalyser() {
+        MoodAnalyser result = null;
         try {
             Class<?> moodAnalyserClass = Class.forName("com.bridgelabz.MoodAnalyser");
             Constructor<?> moodConstructor = moodAnalyserClass.getConstructor();
@@ -25,24 +27,22 @@ public class MoodAnalyserFactory {
         return null;
     }
 
-    public static MoodAnalyser createMoodAnalyserObject_NoClassFound() throws MoodAnalysisException{
+    public static MoodAnalyser createMoodAnalyserObject(String s) throws MoodAnalysisException {
         try {
             Class<?> moodAnalyserClass = Class.forName("com.bridgelabz.MoodAnalyser");
-            Constructor<?> moodConstructor = moodAnalyserClass.getConstructor();
-            Object moodObj = moodConstructor.newInstance();
+            Constructor<?> moodConstructor = moodAnalyserClass.getConstructor(String.class);
+            Object moodObj = moodConstructor.newInstance(s);
             return (MoodAnalyser) moodObj;
         } catch (ClassNotFoundException e) {
-            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS,"NO_SUCH_CLASS_ERROR");
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, "NO_SUCH_CLASS_ERROR");
         } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, "NO_SUCH_METHOD");
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_ACCESS, "NO_ACCESS");
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, "NO_SUCH_CLASS_ERROR");
         } catch (InvocationTargetException e) {
             e.printStackTrace();
-        }
-        return null;
+        }return null;
     }
 }
-
