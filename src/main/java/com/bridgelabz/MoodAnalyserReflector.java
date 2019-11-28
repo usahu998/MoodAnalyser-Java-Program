@@ -43,7 +43,8 @@ public class MoodAnalyserReflector {
             throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, "NO_SUCH_CLASS_ERROR");
         } catch (InvocationTargetException e) {
             e.printStackTrace();
-        }return null;
+        }
+        return null;
     }
 
     public static Object invokeMethod(Object moodAnalyserObject, String methodName) throws MoodAnalysisException {
@@ -60,11 +61,32 @@ public class MoodAnalyserReflector {
         try {
             Field field = myObject.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
-            field.set(myObject,fieldValue);
+            field.set(myObject, fieldValue);
         } catch (IllegalAccessException e) {
             throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_ACCESS, "Invocation data issue");
         } catch (NoSuchFieldException e) {
             throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_FIELD, "Define Proper field Name");
+        }
+    }
+
+    public static Constructor<?> getConstructor(Class<?>... param) throws MoodAnalysisException {
+        try {
+            Class<?> moodAnalyserClass = Class.forName("com.bridgelabz.MoodAnalyser");
+            return moodAnalyserClass.getConstructor(param);
+        } catch (ClassNotFoundException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, "NO_SUCH_CLASS_ERROR_FOUND");
+        } catch (NoSuchMethodException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, "NO_SUCH_METHOD");
+        }
+    }
+
+    public static Object createMoodAnalyser(Constructor<?> constructor, Object... message) throws MoodAnalysisException {
+        try {
+            return constructor.newInstance(message);
+        } catch (IllegalAccessException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_ACCESS, "NO_ACCESS");
+        } catch (InstantiationException | InvocationTargetException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, "NO_SUCH_METHOD");
         }
     }
 }
